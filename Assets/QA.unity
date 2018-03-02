@@ -186,7 +186,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.8455882, g: 0.8455882, b: 0.8455882, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0.5
@@ -3821,10 +3821,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1929845403}
+  - component: {fileID: 1929845399}
   - component: {fileID: 1929845402}
   - component: {fileID: 1929845401}
   - component: {fileID: 1929845400}
-  - component: {fileID: 1929845399}
   - component: {fileID: 1929845398}
   m_Layer: 5
   m_Name: Canvas
@@ -3863,12 +3863,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1929845397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66e957d58a4584a8894329531ec0b096, type: 3}
+  m_Script: {fileID: 11500000, guid: 76e97367b52ea4921bcf4b0f05301173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJSONAsset: {fileID: 4900000, guid: 6cf48bb6d89824cc69e35b43f9a1aca6, type: 3}
+  inkJSONAsset: {fileID: 4900000, guid: 5df2f987f47ff46b5acf56dc3653b8d7, type: 3}
   canvas: {fileID: 1929845402}
-  textPrefab: {fileID: 11456674, guid: 1aab6ef84d87c416f8f0b3e1ef3d77d2, type: 2}
+  textPrefab: {fileID: 114152769253872074, guid: 36522a9715a2648eea4c07014af157ac,
+    type: 2}
   buttonPrefab: {fileID: 11455116, guid: 37c108a6c38964f79a6621eccb33ddc1, type: 2}
 --- !u!114 &1929845400
 MonoBehaviour:

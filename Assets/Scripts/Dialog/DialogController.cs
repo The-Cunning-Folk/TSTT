@@ -19,6 +19,7 @@ public class DialogController : MonoBehaviour {
 	private Button buttonPrefab;
 
 	private int  activeChoice;
+	private int newActiveChoice;
 
 	void Awake () {
 		StartStory();
@@ -31,18 +32,30 @@ public class DialogController : MonoBehaviour {
 	}
 
 	void Update(){
-		int tmpChoice = activeChoice;
-		if (Input.GetKey("left") && activeChoice >= 1)
-            activeChoice -= 1;
-        else if (Input.GetKey("right") && activeChoice < story.currentChoices.Count - 1)
-        	activeChoice += 1;
-        if(tmpChoice != activeChoice)
-        	RefreshChoices();
+		int nChoices = story.currentChoices.Count;
+		if(newActiveChoice != activeChoice && nChoices > 0){
+			if(newActiveChoice >= 0){
+				activeChoice = newActiveChoice%nChoices;
+			}
+			else if(newActiveChoice < 0){
+				activeChoice = newActiveChoice%nChoices!=0 ? 
+				nChoices + newActiveChoice%nChoices:
+				0;
+			}
+			newActiveChoice = activeChoice;
+			RefreshChoices();
+		}
 	}
 
-	void RefreshChoices(){
-		RemoveChoices ();
+	public void SetActiveChoice(int choice){
+		newActiveChoice = choice;
+	}
 
+	public void AlterActiveChoice(int amount){
+		newActiveChoice = activeChoice + amount;
+	}
+
+	void ConstructChoicesList() {
 		if(story.currentChoices.Count > 0) {
 			Choice choice = story.currentChoices [activeChoice];
 			Button button = CreateChoiceView (choice.text.Trim ());
@@ -56,6 +69,11 @@ public class DialogController : MonoBehaviour {
 				StartStory();
 			});
 		}
+	}
+
+	void RefreshChoices(){
+		RemoveChoices ();
+		ConstructChoicesList();
 	}
 
 	void RefreshView () {
@@ -66,19 +84,8 @@ public class DialogController : MonoBehaviour {
 			string text = story.Continue ().Trim();
 			CreateContentView(text);
 		}
-		if(story.currentChoices.Count > 0) {
-			Choice choice = story.currentChoices [activeChoice];
-			Button button = CreateChoiceView (choice.text.Trim ());
-			button.onClick.AddListener (delegate {
-				OnClickChoiceButton (choice);
-			});
-		}
-		 else {
-			Button choice = CreateChoiceView("End of story.\nRestart?");
-			choice.onClick.AddListener(delegate{
-				StartStory();
-			});
-		}
+		ConstructChoicesList();
+
 
 	}
 

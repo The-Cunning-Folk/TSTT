@@ -45,6 +45,11 @@ public class UserInput : MonoBehaviour {
         	dialogInputDecay = dialogInputDelay;
         	dialogCtrl.AlterActiveChoice(1);
         }
+
+        if (dialogInputDecay <= 0.0f && Input.GetKey("e")){
+        	dialogInputDecay = dialogInputDelay;
+        	dialogCtrl.ChooseActiveChoice();
+        }
         
 	}
 }

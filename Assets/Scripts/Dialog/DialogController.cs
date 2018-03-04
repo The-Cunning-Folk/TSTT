@@ -21,6 +21,20 @@ public class DialogController : MonoBehaviour {
 	private int  activeChoice;
 	private int newActiveChoice;
 
+	public void SetActiveChoice(int choice){
+		newActiveChoice = choice;
+	}
+
+	public void AlterActiveChoice(int amount){
+		newActiveChoice = activeChoice + amount;
+	}
+
+	public void ChooseActiveChoice(){
+		if(activeChoice < story.currentChoices.Count && activeChoice >= 0) {
+			ChooseChoiceIndex(activeChoice);
+		}
+	}
+
 	void Awake () {
 		StartStory();
 	}
@@ -28,6 +42,7 @@ public class DialogController : MonoBehaviour {
 	void StartStory () {
 		story = new Story (inkJSONAsset.text);
 		activeChoice = 0;
+		newActiveChoice = 0;
 		RefreshView();
 	}
 
@@ -45,14 +60,6 @@ public class DialogController : MonoBehaviour {
 			newActiveChoice = activeChoice;
 			RefreshChoices();
 		}
-	}
-
-	public void SetActiveChoice(int choice){
-		newActiveChoice = choice;
-	}
-
-	public void AlterActiveChoice(int amount){
-		newActiveChoice = activeChoice + amount;
 	}
 
 	void ConstructChoicesList() {
@@ -78,6 +85,7 @@ public class DialogController : MonoBehaviour {
 
 	void RefreshView () {
 		activeChoice = 0;
+		newActiveChoice = 0;
 		RemoveChildren ();
 
 		while (story.canContinue) {
@@ -90,7 +98,13 @@ public class DialogController : MonoBehaviour {
 	}
 
 	void OnClickChoiceButton (Choice choice) {
-		story.ChooseChoiceIndex (choice.index);
+		ChooseChoiceIndex(choice.index);
+	}
+
+	
+
+	void ChooseChoiceIndex(int choiceIndex){
+		story.ChooseChoiceIndex (choiceIndex);
 		RefreshView();
 	}
 

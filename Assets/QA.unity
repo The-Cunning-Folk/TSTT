@@ -383,7 +383,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.0799999
+  orthographic size: 1.08
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3827,7 +3827,7 @@ GameObject:
   - component: {fileID: 1929845400}
   - component: {fileID: 1929845398}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: DialogCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3870,7 +3870,8 @@ MonoBehaviour:
   canvas: {fileID: 1929845402}
   textPrefab: {fileID: 114152769253872074, guid: 36522a9715a2648eea4c07014af157ac,
     type: 2}
-  buttonPrefab: {fileID: 11455116, guid: 37c108a6c38964f79a6621eccb33ddc1, type: 2}
+  buttonPrefab: {fileID: 114084356153956694, guid: 15f9b03abe3cf4e9998df0734bfe979b,
+    type: 2}
 --- !u!114 &1929845400
 MonoBehaviour:
   m_ObjectHideFlags: 0

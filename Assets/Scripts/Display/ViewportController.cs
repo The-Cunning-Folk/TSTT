@@ -10,10 +10,14 @@ public class ViewportController : MonoBehaviour {
 
 	private float gameCamXSize = 0.5f;
 
-	private float min = 0.5F;
-	private float max =  0.5F;
+	private float min;
+	private float max;
 
-	public float rate = 0.5f;
+	[SerializeField]
+	private float rate = 0.5f;
+
+	[SerializeField]
+	private float startSize = 0.618f;
 
 	private Transform target;
 
@@ -23,6 +27,8 @@ public class ViewportController : MonoBehaviour {
 		dialogCam = transform.GetChild(0).GetComponent<Camera>();
 		gameCam = transform.GetChild(1).GetComponent<Camera>();
 		target = GameObject.Find ("Character").transform;
+		min = startSize;
+		max = startSize;
 	}
 
 	void ChangeGameCamSize(float newSize){

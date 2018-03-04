@@ -43,7 +43,7 @@ public class DialogController : MonoBehaviour {
 		story = new Story (inkJSONAsset.text);
 		activeChoice = 0;
 		newActiveChoice = 0;
-		RefreshView();
+		ResetView();
 	}
 
 	void Update(){
@@ -86,15 +86,25 @@ public class DialogController : MonoBehaviour {
 	void RefreshView () {
 		activeChoice = 0;
 		newActiveChoice = 0;
-		RemoveChildren ();
+		RemoveChoices();
 
 		while (story.canContinue) {
 			string text = story.Continue ().Trim();
 			CreateContentView(text);
 		}
 		ConstructChoicesList();
+	}
 
+	void ResetView () {
+		activeChoice = 0;
+		newActiveChoice = 0;
+		RemoveChildren();
 
+		while (story.canContinue) {
+			string text = story.Continue ().Trim();
+			CreateContentView(text);
+		}
+		ConstructChoicesList();
 	}
 
 	void OnClickChoiceButton (Choice choice) {
@@ -123,6 +133,7 @@ public class DialogController : MonoBehaviour {
 
 		HorizontalLayoutGroup layoutGroup = choice.GetComponent <HorizontalLayoutGroup> ();
 		layoutGroup.childForceExpandHeight = false;
+		choice.tag = "DialogOption";
 
 		return choice;
 	}
@@ -131,14 +142,16 @@ public class DialogController : MonoBehaviour {
 		int childCount = canvas.transform.childCount;
 		for (int i = childCount - 1; i >= 0; --i) {
 			if(canvas.transform.GetChild (i).gameObject.CompareTag("DialogOption"))
-				GameObject.Destroy (canvas.transform.GetChild (i).gameObject);
+			{
+				Destroy (canvas.transform.GetChild(i).gameObject,0.0f);
+			}
 		}
 	}
 
 	void RemoveChildren () {
 		int childCount = canvas.transform.childCount;
 		for (int i = childCount - 1; i >= 0; --i) {
-			GameObject.Destroy (canvas.transform.GetChild (i).gameObject);
+			Destroy (canvas.transform.GetChild (i).gameObject,0.0f);
 		}
 	}
 }
